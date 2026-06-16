@@ -3,7 +3,133 @@
 <img width="320" height="180" alt="Image" src="https://github.com/user-attachments/assets/0cbd6b3b-6166-4c80-be04-f7a31dc5c76e" />
 <img width="320" height="180" alt="Image" src="https://github.com/user-attachments/assets/05dabf06-ea54-4168-8e72-235fbb690f28" />
 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GitHub Search Dropdown</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+    }
 
+    .search-container {
+      position: relative;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      box-sizing: border-box;
+    }
+
+    .dropdown {
+      position: absolute;
+      width: 100%;
+      background: white;
+      border: 1px solid #ddd;
+      max-height: 300px;
+      overflow-y: auto;
+      display: none;
+      z-index: 10;
+    }
+
+    .item {
+      padding: 12px;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+    }
+
+    .item:hover {
+      background: #f0f0f0;
+    }
+
+    .item strong {
+      display: block;
+    }
+
+    .item small {
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>GitHub Repository Search</h2>
+
+<div class="search-container">
+  <input id="search" placeholder="Search GitHub repositories..." />
+  <div id="dropdown" class="dropdown"></div>
+</div>
+
+
+<script>
+const searchBox = document.getElementById("search");
+const dropdown = document.getElementById("dropdown");
+
+let timeout;
+
+searchBox.addEventListener("input", () => {
+  clearTimeout(timeout);
+
+  const query = searchBox.value.trim();
+
+  if (!query) {
+    dropdown.style.display = "none";
+    return;
+  }
+
+  // Delay requests while typing
+  timeout = setTimeout(async () => {
+
+    const response = await fetch(
+      `https://api.github.com/search/repositories?q=${query}`
+    );
+
+    const data = await response.json();
+
+    dropdown.innerHTML = "";
+
+    data.items.slice(0, 8).forEach(repo => {
+
+      const item = document.createElement("div");
+      item.className = "item";
+
+      item.innerHTML = `
+        <strong>${repo.full_name}</strong>
+        <small>
+          ⭐ ${repo.stargazers_count} 
+          ${repo.description ? "- " + repo.description : ""}
+        </small>
+      `;
+
+      item.onclick = () => {
+        window.open(repo.html_url, "_blank");
+        dropdown.style.display = "none";
+      };
+
+      dropdown.appendChild(item);
+    });
+
+    dropdown.style.display = "block";
+
+  }, 400);
+});
+
+
+// Close dropdown when clicking outside
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".search-container")) {
+    dropdown.style.display = "none";
+  }
+});
+</script>
+
+</body>
+</html>
                              
                              
                              
@@ -12,18 +138,11 @@
 
 <img width="320" height="180" alt="Image" src="https://yt3.ggpht.com/ET6_9I4YIOU4epOvBeyaP7_Pplv8IgDDOZbWeeQ9gMF_SICGsDsH_Q7KDCHeainajSr3qj6YJg=s88-c-k-c0x00ffffff-no-rj" />
 <img width="320" height="180" alt="Image" src="https://yt3.ggpht.com/LGpIm3d2YK5G-Exxcacp-Hppq7EVJggvjD7yMGgmO49Fl56JWIBIa-sriUbtY68GiemVVnjp3Q=s88-c-k-c0x00ffffff-no-rj" />
-<img width="3" height="10" alt="Image" src="https://yt3.ggpht.com/O-1wLMKNc9TdzEGG_b_itKRz3R5vqTue_47glWRuhVlixBQGrNl5_KfshMysqOfWsmlnN-0Nvw=s88-c-k-c0x00ffffff-no-rj" />
-<img width="30" height="80" alt="Image" src="https://yt3.ggpht.com/j8aUrX1fvoN_ZrhgRaYi39zRT2NsmoU1E3_Iy-gz7zSVoG63EE6gyWDg3bznSHzeXlJTfMiBpUk=s88-c-k-c0x00ffffff-no-rj" />
-<img width="32" height="180" alt="Image" src="https://yt3.ggpht.com/vyKYDvRNHlyl-cMyRWxz2zWdbEmsGnBCK3cbKKhqUtddIt5xyk8NhxlptEAAdwgCx7RKIccHGA=s88-c-k-c0x00ffffff-no-rj" />
-<img width="320" height="18" alt="Image" src="https://yt3.googleusercontent.com/teVqjhZURr8VFGg7a9agBA6tgz-Ai-XyFiwGkzIB1H8CafVQfHvmPQ4dWrUqyrwq9LvRHscK=s88-c-k-c0x00ffffff-no-rj" />
+<img width="355" height="105" alt="Image" src="https://yt3.ggpht.com/O-1wLMKNc9TdzEGG_b_itKRz3R5vqTue_47glWRuhVlixBQGrNl5_KfshMysqOfWsmlnN-0Nvw=s88-c-k-c0x00ffffff-no-rj" />
+<img width="305" height="805" alt="Image" src="https://yt3.ggpht.com/j8aUrX1fvoN_ZrhgRaYi39zRT2NsmoU1E3_Iy-gz7zSVoG63EE6gyWDg3bznSHzeXlJTfMiBpUk=s88-c-k-c0x00ffffff-no-rj" />
+<img width="325" height="180" alt="Image" src="https://yt3.ggpht.com/vyKYDvRNHlyl-cMyRWxz2zWdbEmsGnBCK3cbKKhqUtddIt5xyk8NhxlptEAAdwgCx7RKIccHGA=s88-c-k-c0x00ffffff-no-rj" />
+<img width="320" height="185" alt="Image" src="https://yt3.googleusercontent.com/teVqjhZURr8VFGg7a9agBA6tgz-Ai-XyFiwGkzIB1H8CafVQfHvmPQ4dWrUqyrwq9LvRHscK=s88-c-k-c0x00ffffff-no-rj" />
 <img width="320" height="180" alt="Image" src="https://yt3.ggpht.com/gRo26MeEy_59FeeseY4nNWiG_IAikFbMGEWdmfVCheETclh6skPnSBfEIOnHX0Whx_uR21iyYg=s48-c-k-c0x00ffffff-no-rj" />
-<img width="320" height="180" alt="Image" src="" />
-<img width="320" height="180" alt="Image" src="" />
-
-
-
-
-<img width="320" height="180" alt="Image" src="" />
 
 
 
